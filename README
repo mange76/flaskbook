@@ -1,0 +1,8 @@
+flaskbook - bookkeeping application written in python - uses flask framework
+
+prerequisites:
+
+flask,flask_wtf,dotenv and sqlalchemy
+use pip to install
+
+

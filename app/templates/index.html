@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Hello {{user.username}}!</h1>
+	{% for tr in transaktions%}
+	<div><p>from {{ tr[0] }} to {{ tr[1] }} amount {{ tr[2]  }}</p></div>
+	{% endfor %}
+{% endblock %}

@@ -1,0 +1,26 @@
+<html>
+	<head>
+		{% if title %}
+		<title>{{ title }} - Book keaping application.</title>
+		{% else %}
+		<title>ProBook - Book keeping application.</title>
+		{% endif %}
+	</head>
+	<body>
+		<div>probook: 
+			<a href="{{ url_for('index') }}">Start</a>
+			<a href="{{ url_for('login')}}">Login</a>
+		</div>
+		<hr>
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul>
+			{% for mesages in messages %}
+			<li>{{ messages }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{% endwith %}
+		{% block content %}{% endblock %}
+	</body>
+</html>

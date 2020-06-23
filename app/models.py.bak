@@ -1,0 +1,30 @@
+from datetime import datetime
+from app import db
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(64), index = True, unique = True)
+    email =  db.Column(db.String(120),index = True, unique = True)
+    password_hash = db.Column(db.String(128))
+    # accounttransactions = db.relationship('AccountTransaction',backref='creator',lazy='dynamic')
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
+
+
+class Account(db.Model):
+    id = db.Column(db.Integer, primary_key = True )
+    number = db.Column(db.Integer,nullable = False)
+    accountname = db.Column(db.String(140), nullable = False)
+    acc_tr = db.relationship('AccountTransaction',backref='author',lazy='dynamic')
+
+    def __repr__(self):
+        return '<Account {}>'.format(self.accountname)
+    
+class AccountTransaction(db.Model):
+    id = db.Column(db.Integer,primary_key = True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    debacc =  db.Column(db.Integer, db.ForeignKey('account.id'))
+    description = db.Column(db.String(140))
+    amount = db.Column(db.Integer, nullable = False)
+    def __repr__(self):
+        return '<AccountTransaction {}>'.format(self.description)
